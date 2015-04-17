@@ -947,7 +947,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel = new ViewModel();
             $viewModel->setTemplate("wizard/wizard/firstSimpleStep.phtml");
             $stepOne->setFormAction("simpleWizard");
-            $stepOne->setViewModelAndRequiredVariables($viewModel);
+            $stepOne->setViewModel($viewModel);
 
             return $stepOne;
         }
@@ -957,7 +957,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel = new ViewModel();
             $viewModel->setTemplate("wizard/wizard/secondSimpleStep.phtml");
             $stepTwo->setFormAction("simpleWizard");
-            $stepTwo->setViewModelAndRequiredVariables($viewModel);
+            $stepTwo->setViewModel($viewModel);
 
             return $stepTwo;
         }
@@ -967,7 +967,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel = new ViewModel();
             $viewModel->setTemplate("wizard/wizard/thirdSimpleStep.phtml");
             $stepThree->setFormAction("simpleWizard");
-            $stepThree->setViewModelAndRequiredVariables($viewModel);
+            $stepThree->setViewModel($viewModel);
 
             return $stepThree;
         }
@@ -1025,7 +1025,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel-&gtsetTemplate("wizard/wizard/stepone.phtml");
             $stepOne = new \WasabiLib\Wizard\StepController("Name", "Name");
             $stepOne-&gtsetFormAction("wizard");
-            $stepOne-&gtsetViewModelAndRequiredVariables($viewModel);
+            $stepOne-&gtsetViewModel($viewModel);
 
             $stepOne->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
                 $this->form = new StepOneForm("stepOneForm", $closureArguments->getServiceLocator());
@@ -1064,7 +1064,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel-&gtsetTemplate("wizard/wizard/steptwo.phtml");
             $stepTwo = new \WasabiLib\Wizard\StepController("Address", "Address");
             $stepTwo-&gtsetFormAction("wizard");
-            $stepTwo-&gtsetViewModelAndRequiredVariables($viewModel);
+            $stepTwo-&gtsetViewModel($viewModel);
 
             $stepTwo-&gtsetInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
                 $serviceLocator = $closureArguments-&gtgetServiceLocator();
@@ -1117,7 +1117,7 @@ $this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/w
             $viewModel-&gtsetTemplate("wizard/wizard/stepthree.phtml");
             $stepThree = new \WasabiLib\Wizard\StepController("Summary", "Summary");
             $stepThree-&gtsetFormAction("wizard");
-            $stepThree-&gtsetViewModelAndRequiredVariables($viewModel);
+            $stepThree-&gtsetViewModel($viewModel);
 
             $stepThree-&gtsetEnterClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
                 /* @var $storageContainer StorageContainer */
