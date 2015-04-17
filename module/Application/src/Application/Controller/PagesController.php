@@ -39,7 +39,7 @@ class PagesController extends AbstractActionController
 {
     public function indexAction()
     {
-       
+
         return new ViewModel();
     }
 
@@ -638,7 +638,7 @@ class PagesController extends AbstractActionController
         $viewModel->setTemplate("wizard/wizard/stepone.phtml");
         $stepOne = new \WasabiLib\Wizard\StepController("Name", "Name");
         $stepOne->setFormAction("wizard");
-        $stepOne->setViewModelAndRequiredVariables($viewModel);
+        $stepOne->setViewModel($viewModel);
 
         $stepOne->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
             $this->form = new StepOneForm("stepOneForm", $closureArguments->getServiceLocator());
@@ -678,7 +678,7 @@ class PagesController extends AbstractActionController
         $viewModel->setTemplate("wizard/wizard/steptwo.phtml");
         $stepTwo = new \WasabiLib\Wizard\StepController("Address", "Address");
         $stepTwo->setFormAction("wizard");
-        $stepTwo->setViewModelAndRequiredVariables($viewModel);
+        $stepTwo->setViewModel($viewModel);
 
         $stepTwo->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
             $serviceLocator = $closureArguments->getServiceLocator();
@@ -726,7 +726,7 @@ class PagesController extends AbstractActionController
         $viewModel->setTemplate("wizard/wizard/stepthree.phtml");
         $stepThree = new \WasabiLib\Wizard\StepController("Summary", "Summary");
         $stepThree->setFormAction("wizard");
-        $stepThree->setViewModelAndRequiredVariables($viewModel);
+        $stepThree->setViewModel($viewModel);
 
         $stepThree->setEnterClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
             /* @var $storageContainer StorageContainer */
@@ -784,7 +784,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/firstSimpleStep.phtml");
         $stepOne->setFormAction("simpleWizard");
-        $stepOne->setViewModelAndRequiredVariables($viewModel);
+        $stepOne->setViewModel($viewModel);
 
         return $stepOne;
     }
@@ -794,7 +794,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/secondSimpleStep.phtml");
         $stepTwo->setFormAction("simpleWizard");
-        $stepTwo->setViewModelAndRequiredVariables($viewModel);
+        $stepTwo->setViewModel($viewModel);
 
         return $stepTwo;
 
@@ -805,7 +805,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/thirdSimpleStep.phtml");
         $stepThree->setFormAction("simpleWizard");
-        $stepThree->setViewModelAndRequiredVariables($viewModel);
+        $stepThree->setViewModel($viewModel);
 
         return $stepThree;
     }
