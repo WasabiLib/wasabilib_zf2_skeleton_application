@@ -790,7 +790,7 @@ class PagesController extends AbstractActionController
     }
 
     private function simpleStepTwo() {
-        $stepTwo = new \WasabiLib\Wizard\StepController("second Step", "secondStep");
+        $stepTwo = new \WasabiLib\Wizard\StepController("second step", "secondStep");
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/secondSimpleStep.phtml");
         $stepTwo->setFormAction("simpleWizard");
