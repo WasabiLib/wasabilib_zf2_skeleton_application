@@ -9,7 +9,7 @@ Installation
 ------------
     cd your/project/dir
     git clone https://github.com/WasabilibOrg/wasabilib_zf2_skeleton_application.git
-    cd wasabilibdevportal
+    cd wasabilib_zf2_skeleton_application
     php composer.phar self-update
     php composer.phar install
 
