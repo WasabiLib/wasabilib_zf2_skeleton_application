@@ -39,12 +39,22 @@ class PagesController extends AbstractActionController
 {
     public function indexAction()
     {
+       
         return new ViewModel();
     }
 
     public function startExampleAction(){
         $innerHtml = new InnerHtml("#start_example_target_id","This comes right from the Server");
         return $this->getResponse()->setContent(new Response($innerHtml));
+    }
+    public function examplesAction(){
+
+    }
+    public function componentsAction(){
+
+    }
+    public function gettingStartedAction(){
+
     }
 
     public function openModalAction(){
