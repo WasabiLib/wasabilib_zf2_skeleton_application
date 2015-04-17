@@ -1,0 +1,1350 @@
+<?php
+$this->headLink()->appendStylesheet($this->basePath() . '/wasabilib_assets/css/wasabi.wizard.css');
+?>
+<div class="wasabiLib-header">
+    <div class="container">
+        <span class="anchor" id="examples"></span>
+        <h1>Examples</h1>
+    </div>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col-md-9" role="main">
+<p><?= sprintf($this->translate("On this page one can find working examples including the necessary code for all components described on  the %scomponents%s page."), '<a href="/application/pages/components">', '</a>')?></p>
+
+<span class="anchor" id="generic_message"></span>
+<h3><?= sprintf($this->translate("GenericMessage"))?></h3>
+<p><?= sprintf($this->translate("To illustrate how the base class of all <i>AJAX</i> messages work, the example below shows how to alter the dom during an AJAX request. In this case we display the message <em>I am injected during an AJAX request.</em> into the gray field in the examples box."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Injecting a HTML element into the DOM."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="target_id" class="container-fluid"></div>
+    </div>
+
+    <button id="generic_message_btn" class="ajax_element" data-href="genericMessage">GenericMessage Example</button><br><br>
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function genericMessageAction() {
+            $selector = "#target_id";
+            $actionType = "ACTION_TYPE_REPLACE";
+            $eventType = "innerHtml";
+            $params = array("&lt;p&gt;I am injected during an AJAX request.&lt;/p&gt;");
+
+            // Any class with type GenericMessage or ResponseConfigurator or subclasses
+            $message = new GenericMessage($selector, $actionType, $eventType, $params);
+
+            $response = new Response();
+            $response->add($message);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<p><?= sprintf($this->translate("Another example of an AJAX action is the manipulation of an existing HTML element. Below the example shows how to change the background color of the button with the label <em>GenericMessage Example 2</em>."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Manipulating a HTML element."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="gm_btn" class="ajax_element" data-href="genericMessageChangeColor">GenericMessage Example 2</button>
+    </div>
+</div>
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function genericMessageChangeColorAction() {
+        // Any class with type GenericMessage or ResponseConfigurator or subclasses
+        $message = new GenericMessage("#gm_btn", "ACTION_TYPE_CSS", "domManipulator",
+                        "DomManipulator", array("background-color", "red"));
+
+        $response = new Response();
+        $response->add($message);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<span class="anchor" id="console_log"></span>
+<h3><?= sprintf($this->translate("ConsoleLog"))?></h3>
+
+<p><?= sprintf($this->translate("To debug your code we have implemented the class <i>ConsoleLog</i>. This class allows the developer to send log informations to the website to inspect them in the console area of the browsers developer tools."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Showing log informations in the console area of the browser."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div>Please push the button and take a look into the console area of your browser.</div>
+    </div>
+    <button id="send_two_response_types_btn" class="ajax_element" data-href="consoleLog">ConsoleLog</button><br>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    class ConsoleLog extends ResponseType{
+        private $varExport;
+
+        public function __construct($whatToLog){
+            $this->varExport = var_export($whatToLog, true) ;
+            $this->setEventName("consoleLog");
+        }
+
+        public function message() {
+            return "*************  wasabiLib Ajax Console Log   ******************
+            ".$this->varExport."\n************************************************************";
+        }
+    }
+
+    public function consoleLogAction() {
+        $consoleLog = new ConsoleLog(get_class($this));
+
+        $response = new Response();
+        $response->add($consoleLog);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<span class="anchor" id="inner_html"></span>
+<h3><?= sprintf($this->translate("InnerHtml"))?></h3>
+<p><?= sprintf($this->translate("The InnerHtml class allows to replace, append or remove HTML snippets from HTML elements. The examples below illustrate all possibilities."))?></p>
+
+<ul>
+    <li><?= sprintf($this->translate("The css selector"))?></li>
+    <li><?= sprintf($this->translate("The optional action type: Possible values are ACTION_TYPE_REPLACE (default), ACTION_TYPE_APPEND and ACTION_TYPE_REMOVE"))?></li>
+    <li><?= sprintf($this->translate("The content if one wants to add/replace or append an element to the dom."))?></li>
+    <li><?= sprintf($this->translate("The PhpRenderer if one wants to use the InnerHtml class with a ZF2 ViewModel."))?></li>
+</ul>
+
+<p><?= sprintf($this->translate("Below several examples illustrate the usage of the InnerHtml class."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Add an element to the DOM."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="inner_html_id1" class="container-fluid"></div>
+    </div>
+    <button id="inner_html_btn1" class="ajax_element" data-href="innerHtmlExampleOne">InnerHtml Example 1</button><br><br>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function innerHtmlExampleOneAction() {
+            $innerHtml = new InnerHtml("inner_html_id1",
+                            "I am the first example to fill in content with the InnerHtml class.");
+
+            $response = new Response();
+            $response->add($innerHtml);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Remove an element from the DOM."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="inner_html_id2" class="container-fluid">I will be removed.</div>
+    </div>
+    <button id="inner_html_btn2" class="ajax_element" data-href="innerHtmlExampleTwo">InnerHtml Example 2</button><br><br>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function innerHtmlExampleOneAction() {
+            $innerHtml = new InnerHtml("#inner_html_id2", null, "ACTION_TYPE_REMOVE");
+
+            $response = new Response();
+            $response->add($innerHtml);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Append an element to the DOM."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="inner_html_id3" class="container-fluid">I will get a sibling.</div>
+    </div>
+    <button id="inner_html_btn3" class="ajax_element" data-href="innerHtmlExampleThree">InnerHtml Example 3</button><br><br>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function innerHtmlExampleOneAction() {
+            $innerHtml = new InnerHtml("#inner_html_id3",
+                            "I am a sibling and I will get another sibling.", "ACTION_TYPE_APPEND");
+
+            $response = new Response();
+            $response->add($innerHtml);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<span class="anchor" id="modal_info_window"></span>
+<h3><?= sprintf($this->translate("Modal Info Window"))?></h3>
+<p><?= sprintf($this->translate("An Info modal window is made to display a short informational text (one to three sentences). It contains a title, a content (usually text) and an 'OK'-button. In this case the modal window shows the typical text <em>Your settings has been saved successfully.</em>"))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Info modal window"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn2" class="ajax_element" data-json='{"type":"info"}' data-href="modal">Info Example</button><br>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function infoAction() {
+        $response = new Response();
+
+        $info = new Info("Info", "Saved", "Your settings has been saved successfully.");
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $info);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code></pre></div>
+
+<span class="anchor" id="modal_dialog_window"></span>
+<h3><?= sprintf($this->translate("Modal Dialog Window"))?></h3>
+<p><?= sprintf($this->translate("A Dialog modal window is made for displaying a question and receive an answer from the user. Therefor it contains a title, a content in the body consisting of a text and an optional small icon powered by %sFont Awesome%s and two buttons (accept and decline) to receive the answer."), '<a href="http://fortawesome.github.io/Font-Awesome/">', '</a>')?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Dialog modal window"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="wasabi_modal"></div>
+        <button id="btn1" class="ajax_element" data-json='{"type":"dialog"}' data-href="modal">Dialog Example</button><br>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function dialogAction() {
+        $response = new Response();
+
+        $dialog = new Dialog("Dialog", "Accept or Decline",
+                    "Do you really want to abort this action?", Dialog::TYPE_SUCCESS);
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $dialog);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code></pre></div>
+
+<span class="anchor" id="modal_standard_window"></span>
+<h3><?= sprintf($this->translate("Modal Standard Window"))?></h3>
+<p><?= sprintf($this->translate("The Standard modal window is the most flexible built-in modal view of the WasabiLib. It is made to display any content one can think of to show it to the user. It contains a title, a close button, a content like a text or a ZF2 ViewModel and a variable number of buttons. Also as default the user can close the modal view by clicking the close button or the outside area of the Standard modal view. Below the examples illustrates how to use a ZF2 template with an image followed by a <em>lorem ipsum</em> text. It also contains to buttons which will lead the user to another <em>lorem ipsum</em> template. The first button redirects the user to the new site and the second button replaces the modal window content with the templates content."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Standard modal window"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn3" class="ajax_element" data-json='{"type":"standard"}' data-href="modal">Standard Example</button><br>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function standardAction() {
+        $response = new Response();
+
+        $standard = new WasabiModal("Standard", "Standard Window");
+
+        $button = new Button('More Info');
+        $button->setAction("standardModalInfo", false);
+
+        $standard->addButton($button);
+
+        $ajaxButton = new Button('More Info (with Ajax)');
+        $ajaxButton->setAction("standardModalWithAjaxInfo");
+
+        $standard->addButton($ajaxButton);
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+        $viewModel->setContent($viewModel);
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code></pre></div>
+
+<p><?= sprintf($this->translate("It is also possible with the implementation of the modal windows within the WasabiLib to open more than one modal windows at a time within the browser window. Th example below opens a standard modal window and from their a dialog modal window can be opened followed by an info modal window. In the end there are three modal windows open."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("First of three modal windows"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn3" class="ajax_element" data-json='{"type":"standard"}' data-href="firstOfThree">First Of Three Example</button><br>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function firstOfThreeAction() {
+        $response = new Response();
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+
+        $standard = new WasabiModal("Standard", "Standard Window");
+
+        $button = new Button('More Info');
+        $button->setAction("secondOfThree");
+
+        $standard->addButton($button);
+
+        $standard->setContent($viewModel);
+        $modal = new WasabiModalView("#wasabi_modal",
+        $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+
+    public function secondOfThreeAction() {
+        $response = new Response();
+
+        $modalConf = new Dialog("Dialog", "Accept or Decline",
+                        "Do you really want to abort this action?"), Dialog::TYPE_SUCCESS);
+        $modalConf->getConfirmButton()->setButtonText("Abort");
+        $modalConf->getConfirmButton()->isNoDismissButton();
+        $modalConf->getConfirmButton()->setAction("thirdOfThree");
+        $modalConf->getDismissButton()->setButtonText("decline");
+
+        $modalConf->addClass("wasabi");
+
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $modalConf);
+        $modal->setActionType(InnerHtml::ACTION_TYPE_APPEND);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+
+    public function thirdOfThreeAction() {
+        $response = new Response();
+
+        $modalConf = new Info("Info", "Saved", "You've aborted this action successfully.");
+
+        $modalConf->addClass("wasabi");
+
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $modalConf);
+        $modal->setActionType(InnerHtml::ACTION_TYPE_APPEND);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code></pre></div>
+
+<p><?= sprintf($this->translate("It is also possible to change the default appearance of the modal window. The lines below shows two examples for different css classes and sizes for the upper standard modal window. Note: The used CSS can be found in the Appendix section."))?><p>
+<p><?= sprintf($this->translate("With the <i>setSize(\$size)</i> method the developer can choose three different sizes, where one size is the default size. To display a large window one use the <i>LARGE_SIZE</i> constant and for a small window the <i>SMALL_SIZE</i> constant."))?><p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Small and large Standard modal window with the options <i>modal-sm</i> and <i>modal-lg</i>"))?></p>
+    <div class="highlight" style="min-height: 55px">
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"size":"modal-sm"}' data-href="standardSize">Small Standard Example</button>
+        <button id="btn3" style="float:left;margin-bottom: 10px" class="ajax_element" data-json='{"size":"modal-lg"}' data-href="standardSize">Large Standard Example</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+        public function standardCssAction() {
+            $size = $this->params()->fromQuery("size");
+            $response = new Response();
+
+            $standard = new WasabiModal("Standard", "Standard Window");
+            $standard->setSize($size);
+
+            $button = new Button('More Info');
+            $button->setAction("standardModalInfo", false);
+
+            $standard->addButton($button);
+
+            $ajaxButton = new Button('More Info (with Ajax)');
+            $ajaxButton->setAction("standardModalWithAjaxInfo");
+
+            $standard->addButton($ajaxButton);
+
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+            $standard->setContent($viewModel);
+            $modal = new WasabiModalView("#wasabi_modal",
+                        $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+            $response->add($modal);
+
+            return $this->getResponse()->setContent($response);
+        }
+        </code></pre></div>
+
+<p><?= sprintf($this->translate("With the <i>addClass(\$class)</i> method the developer can add any number of css classes to the modal window wrapper element and use this classes to customize the appearance of the window. In this example the css of the header is overwritten and therefor the header red or black."))?><p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Custom css classes <i>red-standard-modal</i> and <i>black-standard-modal</i> for the Standard modal window"))?></p>
+    <div class="highlight" style="min-height: 55px">
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"class":"red-standard-modal"}' data-href="standardCss">Red Standard Example</button>
+        <button id="btn3" style="float:left;margin-bottom: 10px" class="ajax_element" data-json='{"class":"black-standard-modal"}' data-href="standardCss">Black Standard Example</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+        public function standardCssAction() {
+            $size = $this->params()->fromQuery("class");
+            $response = new Response();
+
+            $standard = new WasabiModal("Standard", "Standard Window");
+            $standard->addClass($class);
+
+            $button = new Button('More Info');
+            $button->setAction("standardModalInfo", false);
+
+            $standard->addButton($button);
+
+            $ajaxButton = new Button('More Info (with Ajax)');
+            $ajaxButton->setAction("standardModalWithAjaxInfo");
+
+            $standard->addButton($ajaxButton);
+
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+            $standard->setContent($viewModel);
+            $modal = new WasabiModalView("#wasabi_modal",
+                        $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+            $response->add($modal);
+
+            return $this->getResponse()->setContent($response);
+        }
+        </code></pre></div>
+
+<p><?= sprintf($this->translate("One can use a normal button to close the modal window, e.g. after finishing a task displayed within a modal window, and use this button to initiate an AJAX request. An example is shown below. Note: Take look at the gray field within the examples box."))?><p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Use normal Button to close the modal window and additionally send an AJAX request to the server."))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <div id="close_modal_id1" class="container-fluid"></div>
+    </div>
+    <button id="close_modal_btn1" class="ajax_element" data-href="standardClose">Close options for Standard modal</button><br><br>
+
+</div>
+<div class="highlight"><pre>
+        <code class="language-php">
+    // controller method for the Standard modal window
+    public function standardCloseAction() {
+        $response = new Response();
+
+        $standard = new WasabiModal("Standard", "Standard Window");
+
+        // Use a customized close button
+        $closeButton = new Button("finish");
+        $closeButton->setAction("standardFinishAction");
+        $closeButton->isDismissButton();
+
+        $standard->addButton($closeButton);
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+        $standard->setContent($viewModel);
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+        $response->add($modal);
+    }
+
+    // controller method for the finish button
+    public function standardFinishAction() {
+        $response = new Response();
+
+        $innerHtml = new InnerHtml("#close_modal_id1", "The modal window is closed.");
+
+        $response->add($innerHtml);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<p><?= sprintf($this->translate("Another way to close a modal window is to click on the outside of the modal window. An example how to enable/disable this feature is shown below. Note: This feature is activated by default in the used <i>WasabiModal</i> class."))?><p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Different backdrop options <i>true</i>, <i>static</i> and <i>false</i> for the Standard modal window"))?></p>
+    <div class="highlight" style="min-height: 55px">
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"backdrop":"true"}' data-href="standardBackdrop">Default backdrop Standard Example</button>
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"backdrop":"static"}' data-href="standardBackdrop">Static backdrop Standard Example</button>
+        <button id="btn3" style="float:left;margin-bottom: 10px" class="ajax_element" data-json='{"backdrop":"false"}' data-href="standardBackdrop">Without backdrop Standard Example</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function standardCssAction() {
+        $backdropOption = $this->params()->fromQuery("backdrop");
+        $response = new Response();
+
+        $standard = new WasabiModal("Standard", "Standard Window");
+        // set backdrop option
+        $standard->->setBackdrop($backdropOption);
+
+        $button = new Button('More Info');
+        $button->setAction("standardModalInfo", false);
+
+        $standard->addButton($button);
+
+        $ajaxButton = new Button('More Info (with Ajax)');
+        $ajaxButton->setAction("standardModalWithAjaxInfo");
+
+        $standard->addButton($ajaxButton);
+
+        $viewModel = new ViewModel();
+        $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+        $standard->setContent($viewModel);
+        $modal = new WasabiModalView("#wasabi_modal",
+                    $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+        $response->add($modal);
+
+        return $this->getResponse()->setContent($response);
+    }
+        </code></pre></div>
+
+<p><?= sprintf($this->translate("The default animation let the modal windows fade in top down. But the developer can deactivate the animation with the method call <i>setAnimationType(false)</i> or define custom animations and call the <i>setAnimationType(\$animation)</i> with an own animation class name. For the example the two custom animations <i>slow-fade</i> and <i>fast-fade</i> were written. The corresponding CSS animation definition can be found in the %sAppendix%s section."), '<a href="examples#appendix">', '</a>')?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Different animations for the Standard modal window"))?></p>
+    <div class="highlight" style="min-height: 55px">
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"animation":"false"}' data-href="standardAnimation">No Animation Standard Example</button>
+        <button id="btn3" style="float:left;margin-right: 5px" class="ajax_element" data-json='{"animation":"fast-fade"}' data-href="standardAnimation">Fast Animation Standard Example</button>
+        <button id="btn3" style="float:left;margin-bottom: 10px" class="ajax_element" data-json='{"animation":"slow-fade"}' data-href="standardAnimation">Slow Animation Standard Example</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+            public function standardAnimationAction() {
+                $animation = $this->params()->fromQuery("animation");
+                $response = new Response();
+
+                $standard = new WasabiModal("Standard", "Standard Window");
+                // set animation option
+                $standard->setAnimationType($animation);
+
+                $button = new Button('More Info');
+                $button->setAction("standardModalInfo", false);
+
+                $standard->addButton($button);
+
+                $ajaxButton = new Button('More Info (with Ajax)');
+                $ajaxButton->setAction("standardModalWithAjaxInfo");
+
+                $standard->addButton($ajaxButton);
+
+                $viewModel = new ViewModel();
+                $viewModel->setTemplate("examples/examples/standardModalExample.phtml");
+                $standard->setContent($viewModel);
+                $modal = new WasabiModalView("#wasabi_modal",
+                $this->getServiceLocator()->get("ViewRenderer"), $standard);
+
+                $response->add($modal);
+
+                return $this->getResponse()->setContent($response);
+            }
+        </code></pre></div>
+
+<span class="anchor" id="gritter_message"></span>
+<h3><?= $this->translate('GritterMessage') ?></h3>
+<p><?= sprintf($this->translate("With GritterMessages the developer can inform a user about new activity or events happened. In the following examples one can see how use the <i>GritterMessage</i> class and how to change the appearance and the behaviour of that messages."))?></p>
+<p><?= sprintf($this->translate("The first example shows the simple info message text <em>This is a simple message with text only.</em> and default values like the time (3300 milliseconds) as long can the message be seen until it disappear."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Simple Message"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn4" class="ajax_element" data-href="shortSimple">Gritter Example 1</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortSimpleAction() {
+        $shortMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $shortMessage->setTitle("This is a simple message with text only.");
+        $shortMessage->setText("Simple Notification");
+
+        $response = new Response();
+        $response->add($shortMessage);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+<p><?= sprintf($this->translate("The second example ilustrates hwo to implement a simple info message with the text <em>This is a message with a Font Awesome Icon.</em> and and an <i>Font Awesome</i> icon. Note: All <i>Font Awesome</i> Icons can be found %shere%s"), '<a href="http://fortawesome.github.io/Font-Awesome/icons/">', '</a>')?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Message with Font Awesome icon"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn4" class="ajax_element" data-href="shortFA">Gritter Example 2</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortFAAction() {
+        $shortMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $shortMessage->setTitle("This is a message with a Font Awesome Icon.");
+        $shortMessage->setText("Notification with FA");
+        $shortMessage->setIcon("envelope");
+
+        $response = new Response();
+        $response->add($shortMessage);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<p><?= sprintf($this->translate("The <i>GritterMessage</i> class is shipped with four different appearances activated with the constants <i>TYPE_INFO</i>, <i>TYPE_SUCCESS</i>, <i>TYPE_ERROR</i> and <i>TYPE_ALERT</i> of the <i>GritterMessage</i> class itself. Every constant defines a backgroundcolor and an <i>Font Awesome</i> icon for a notification. Also every <i>GritterMessage</i> has its own time in milliseconds until it disappears. Note: With the method <i>setCssClass(\$cssClass)</i> one can set a custom CSS class to define a custom layout for the gritter messages."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Typed Message"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn4" class="ajax_element" data-href="shortTyped">Gritter Example 3</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortTypedAction() {
+        $infoMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $infoMessage->setTitle("This is a blue info message with a text and a Font Awesome icon.");
+        $infoMessage->setText("Info Notification");
+        $infoMessage->setTime(2400);
+        $infoMessage->setType(GritterMessage::TYPE_INFO);
+
+        $successMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $successMessage->setTitle("This is a green success message with a text and a Font Awesome icon.");
+        $successMessage->setText("Success Notification");
+        $successMessage->setTime(2600);
+        $successMessage->setType(GritterMessage::TYPE_SUCCESS);
+
+        $shortErrorMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $shortErrorMessage->setTitle("This is a red error message with text and a Font Awesome icon.");
+        $shortErrorMessage->setText("Error Notification");
+        $shortErrorMessage->setTime(2800);
+        $shortErrorMessage->setType(GritterMessage::TYPE_ERROR);
+
+        $alertMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $alertMessage->setTitle("This is an orange alert message with text and a Font Awesome icon.");
+        $alertMessage->setText("Alert Notification");
+        $alertMessage->setType(GritterMessage::TYPE_ALERT);
+
+        $response = new Response();
+        $response->add($infoMessage);
+        $response->add($successMessage);
+        $response->add($shortErrorMessage);
+        $response->add($alertMessage);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<p><?= sprintf($this->translate("Instead of a <i>Font Awesome</i> icon, an image can also be used within a <i>GritterMessage</i>. The example below shows how to load an image from a remote resource."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Message with image"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn4" class="ajax_element" data-href="shortImage">Gritter Example 4</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortImageAction() {
+        $shortMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $shortMessage->setTitle("This is a info message with text, and an image.");
+        $shortMessage->setText("Notification with an Image");
+        $shortMessage->setImage("http://johnjournal.bravesites.com/files/images/Profile_Score_Photo.jpg");
+
+        $response = new Response();
+        $response->add($shortMessage);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<p><?= sprintf($this->translate("The upper right corner is the default position where a <i>GritterMessage</i> is displayed. But the other three corners can also be used to display the notification. Therefore the developer can set the new position with one of the four constants <i>POSITION_TOP_LEFT</i>, <i>POSITION_TOP_RIGHT</i>, <i>POSITION_BOTTOM_RIGHT</i> and <i>POSITION_BOTTOM_LEFT</i>. Additionally this example uses a <i>DomManipulator</i> to change the parameter of the button with the label <em>Gritter Example 5</em> to put the notification to the next corner."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Message with changing position. (Please push the button several times)"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn5" class="ajax_element" data-json='{"position":"top-right"}' data-href="shortPositions">Gritter Example 5</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortImageAction() {
+        $position = $this->params()->fromQuery("position");
+        $shortMessage = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $shortMessage->setTitle("This is a message at different positions.");
+        $shortMessage->setText("Notification at different positions.");
+        $shortMessage->setPosition($position);
+
+        switch($position) {
+            case GritterMessage::POSITION_TOP_RIGHT:
+                $newPosition = GritterMessage::POSITION_TOP_LEFT;
+            break;
+            case GritterMessage::POSITION_TOP_LEFT:
+                $newPosition = GritterMessage::POSITION_BOTTOM_LEFT;
+            break;
+            case GritterMessage::POSITION_BOTTOM_LEFT:
+                $newPosition = GritterMessage::POSITION_BOTTOM_RIGHT;
+            break;
+            default:
+                $newPosition = GritterMessage::POSITION_TOP_RIGHT;
+            break;
+        }
+
+        $changeNextPosition = new DomManipulator("#btn5", "data-json",
+                                '{"position":"'.$newPosition.'"}', DomManipulator::ACTION_TYPE_ATTR);
+        $response = new Response();
+        $response->add($shortMessage);
+        $response->add($changeNextPosition);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<p><?= sprintf($this->translate("As already seen the developer can define the dwell time of a gritter message where the default time is 3300 milliseconds, but a permanent message is also possible by setting the <i>sticky</i> attribute with the <i>setSticky(\$bool)</i> method to <i>true</i>. In this example two message appear on the screen. The first one is a permant message which must be closed manually, and the second message has a dwell time of 5 seconds."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Sticky Message and with longer dwell time"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn6" class="ajax_element" data-json='{"position":"top-right"}' data-href="shortStickyAndTime">Gritter Example 6</button>
+    </div>
+</div>
+
+<div class="highlight"><pre>
+        <code class="language-php">
+    public function shortStickyAndTimeAction() {
+        $messageSticky = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $messageSticky->setTitle("Permanent Notification");
+        $messageSticky->setText("This is a message which will not disappear.");
+        $messageSticky->setSticky(true);
+
+        $fiveSeconds = $this->getServiceLocator()->get("MessageFactory")->shortMessage();
+        $fiveSeconds->setTitle("Notification with 5 seconds dwell time");
+        $fiveSeconds->setText("This is a message which will disappear in 5 seconds.");
+        $fiveSeconds->setTime(5000);
+
+        $response = new Response();
+        $response->add($messageSticky);
+        $response->add($fiveSeconds);
+        return $this->getResponse()->setContent($response);
+    }
+        </code>
+    </pre></div>
+
+<span class="anchor" id="dom_manipulator"></span>
+<h3><?= sprintf($this->translate("DomManipulator"))?></h3>
+<p><?= sprintf($this->translate("The <i>DomManipulator</i> class is used to manipulate existing elements in the DOM. To manipulate the DOM the class provides a bunch of constants. The example belows illustrates the usage and some of the frequently used actions."))?></p>
+<p><?= sprintf($this->translate("In the first example the CSS attribute <i>background-color</i> of the element with the id <i>dme_id1</i> (the empty gray box) is set to white. Since changes to the CSS is the default action, the appropriate constant was omitted in the initialization."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Changing a CSS element."))?></p>
+    <div id="dme_id1" class="highlight" style="min-height: 40px">
+    </div>
+    <button id="dom_manipulator_btn1" class="ajax_element" data-href="domManipulatorExampleOne">DomManipulator Example 1</button><br><br>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function domManipulatorExampleOneAction() {
+            $domManipulator = new DomManipulator("#dme_id1", "background-color", "#fff");
+
+            $response = new Response();
+            $response->add($domManipulator);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<p><?= sprintf($this->translate("The second example shows how to toggle a CSS class. In that case it is the highlight class of the gray box below. Please push the button several times."))?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Removing/adding with toggleClass the CSS class 'highlight."))?></p>
+    <div id="dme_id2" class="highlight" style="min-height: 40px">
+    </div>
+    <button id="dom_manipulator_btn2" class="ajax_element" data-href="domManipulatorExampleTwo">DomManipulator Example 2</button><br><br>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function domManipulatorExampleTwoAction() {
+            $domManipulator = new DomManipulator("#dme_id2", "highlight", null, "ACTION_TYPE_TOGGLE_CLASS");
+
+            $response = new Response();
+            $response->add($domManipulator);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<span class="anchor" id="trigger_event_manager"></span>
+<h3><?= sprintf($this->translate("TriggerEventManager"))?></h3>
+<p><?= sprintf($this->translate("With the <i>TriggerEventManager</i> class a developer can trigger JavaScript events from within the php code. The default event is the on click event. Below one can see two buttons. The first button appends a text with the <i>InnerHtml</i> class to to the content of the gray box. The second button executes the <i>TriggerEventManager</i> and an on click event is triggered on the first button."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("TriggerEventManager Example."))?></p>
+    <div id="tem_id" class="highlight" style="min-height: 40px">
+    </div>
+    <button id="tem_btn1" class="ajax_element" data-href="appendText">First</button>
+    <button id="tem_btn2" class="ajax_element" data-href="triggerFirstButton">Second</button>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        // controller method for the first button
+        public function appendTextAction() {
+            $innerHtml = new InnerHtml("#tem_id", "Appended Text. ", "ACTION_TYPE_APPEND");
+
+            $response = new Response();
+            $response->add($innerHtml);
+
+            return $this->getResponse()->setContent($response);
+        }
+
+        public function triggerFirstButtonAction() {
+            $trigger = new TriggerEventManager("#tem_btn1");
+
+            $response = new Response();
+            $response->add($trigger);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<span class="anchor" id="redirect"></span>
+<h3><?= sprintf($this->translate("Redirect"))?></h3>
+<p><?= sprintf($this->translate("The example of the <i>Redirect</i> class shows how to redirect to another website during an AJAX request. In this example the user will be redirected to the getting started website by pushing the button with the label <em>Getting Started</em>."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Redirect Example."))?></p>
+    <div id="tem_id" class="highlight" style="min-height: 40px">
+    </div>
+    <button id="red_btn" class="ajax_element" data-href="redirect">Getting Started</button>
+
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function redirectAction() {
+            $redirect = new Redirect("/application/pages/gettingStarted");
+
+            $response = new Response();
+            $response->add($redirect);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<span class="anchor" id="alert"></span>
+<h3><?= sprintf($this->translate("Alert"))?></h3>
+<p><?= sprintf($this->translate("This example illustrates the usage of the PHP class <i>Alert</i>. It was implemented during an example of how to extend the WasabiLib. The example can be found %shere%s."), '<a href="/application/pages/components#how-to-extend">', '</a>')?></p>
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Alert Example"))?></p>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btn5" class="ajax_element" data-json='{"position":"top-right"}' data-href="alert">Alert Example</button>
+    </div>
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function alertAction() {
+            $alert = new Alert("This is important!");
+
+            $response = new Response();
+            $response->add($alert);
+
+            return $this->getResponse()->setContent($response);
+        }
+            </code>
+        </pre>
+</div>
+
+<span class="anchor" id="wizard"></span>
+<h3><?= $this->translate('Wizard') ?></h3>
+<p><?= sprintf($this->translate("A wizard for e.g. registration processes is also part of the WasabiLib. This Wizard allows a developer to develop a registration or configuration process encapsulated in a closure based infrastructure. This approach has the advantage that a developer can focus on the implementation of the individual steps of a process rather than on how they are processed. The following examples shows a threee steps. In the first example the steps are empty and in the second example the steps display a registration process with two steps and an overview step in which a first name, a surname and an address must be specified by a user. The written example code is shown in below. Every step is implemented within an own private method named <i>simpleStep</i>{Number of the step in words}<i>()</i> for the first example respectively <i>step</i>{Number of the step in words}<i>()</i> for the second example. Within the methods the needed step logic is implemented. Note: The used templates can be seen in the %sAppendix%s section."), '<a href="examples#appendix">', '</a>')?></p>
+
+<p><?= sprintf($this->translate("In the first example <em>Simple Wizard Example</em> all step methods initalizing the step controller with a breadcrumb title, the name of the step and a ZF2 view model including the required html template. In the method <i>simpleStepCollectionClosure</i> the three methods are potted into a step collection within a closure to provide the step logic to the step controller within the wizard."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Simple Wizard Example"))?></p>
+    <div id="wizard_modal"><?=$this->content?></div>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btnSimpleWizard" class="ajax_element" data-href="simpleWizard">Simple Wizard Example</button>
+    </div>
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function simpleWizardAction() {
+            $response = new Response();
+            $wizard = new \WasabiLib\Wizard\Wizard("#Wizard .modal-body", $this->getRequest()
+                        , $this->simpleStepCollectionClosure(), $this->getServiceLocator());
+            $wizard->disablePrevButton();
+
+            if ($wizard->isFirstCall()) {
+                $wizard->getStorageContainer()->clearStorage();
+                $modal = new WasabiModal("Wizard", "Wizard Example"
+                            , $wizard->getViewResult()->getViewModel());
+                $modalView = new WasabiModalView("#wizard_modal"
+                                , $this->getServiceLocator()->get("ViewRenderer"), $modal);
+                $response->add($modalView);
+            } else {
+                $response->add($wizard->getViewResult());
+            }
+            return $this->getResponse()->setContent($response);
+        }
+
+        private function simpleStepCollectionClosure() {
+            $stepCollectionClosure = function () {
+                $stepCollection = new StepCollection();
+                $stepCollection->add($this->simpleStepOne());
+                $stepCollection->add($this->simpleStepTwo());
+                $stepCollection->add($this->simpleStepThree());
+
+                return $stepCollection;
+            };
+            return $stepCollectionClosure;
+        }
+
+        private function simpleStepOne() {
+            $stepOne = new \WasabiLib\Wizard\StepController("first step", "firstStep");
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate("wizard/wizard/firstSimpleStep.phtml");
+            $stepOne->setFormAction("simpleWizard");
+            $stepOne->setViewModelAndRequiredVariables($viewModel);
+
+            return $stepOne;
+        }
+
+        private function simpleStepTwo() {
+            $stepTwo = new \WasabiLib\Wizard\StepController("second Step", "secondStep");
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate("wizard/wizard/secondSimpleStep.phtml");
+            $stepTwo->setFormAction("simpleWizard");
+            $stepTwo->setViewModelAndRequiredVariables($viewModel);
+
+            return $stepTwo;
+        }
+
+        private function simpleStepThree() {
+            $stepThree = new \WasabiLib\Wizard\StepController("finish", "finish");
+            $viewModel = new ViewModel();
+            $viewModel->setTemplate("wizard/wizard/thirdSimpleStep.phtml");
+            $stepThree->setFormAction("simpleWizard");
+            $stepThree->setViewModelAndRequiredVariables($viewModel);
+
+            return $stepThree;
+        }
+            </code>
+        </pre>
+</div>
+
+
+<p><?= sprintf($this->translate("In the second example all methods initializing also a step controller with a breadcrumb title, the name of the step, a ZF2 view model including the requierd html form template and aditionally an action of the form. Then the methods, except the <i>stepThree</i> method, implement the init closure. This init closure sets the form classes implemented within the <i>StepOneForm</i> for the first step and <i>StepTwoFrom</i> for the second step. For the form classes two form validators are implemented used by the step form classes to validate the correctness of the given inputs. If the form data is validated to true the process closure saves the reveived data within a ZF2 storage container and return true. Else the received data is also saved and additionally an error message is shown within a modal dialog window. In the step two process closure the handling of the form data is slightly different. The wizard provides two additional closures. The post process closure to execute action after the processing of the step is finished and the leave to ancestor closure where action can be defined when the user goes a step backwards. Here in both cases the received form data is saved for later usage. The last step gives an overview about the data entered by the user. Therefor the enter closure takes the collected data from the storage container to inform the user about the entered informations. The three methods are potted into the step collection closure to provide the step logic to the step controller within the wizard."))?></p>
+<p><?= sprintf($this->translate("Note: All fields are required. Therefor an error message in a modal window shows up and the blank field is marked."))?></p>
+
+<div class="bs-example">
+    <p><?= sprintf($this->translate("Wizard Example"))?></p>
+    <div id="wizard_modal"><?=$this->content?></div>
+    <div class="highlight" style="min-height: 40px">
+        <button id="btnWizard" class="ajax_element" data-href="wizard">Wizard Example</button>
+    </div>
+</div>
+<div class="highlight">
+        <pre>
+            <code class="language-php">
+        public function wizardAction() {
+            $response = new Response();
+            $wizard = new Wizard("#Wizard .modal-body", $this->getRequest(),
+                $this->stepCollectionClosure(), $this->getServiceLocator());
+            $wizard->disablePrevButton();
+            if ($wizard->isFirstCall()) {
+                $wizard->getStorageContainer()->clearStorage();
+                $modal = new WasabiModal("Wizard", "Wizard Example",
+                            $wizard->getViewResult()->getViewModel());
+                $modalView = new WasabiModalView("#wizard_modal",
+                                $this->getServiceLocator()->get("ViewRenderer"), $modal);
+                $response->add($modalView);
+            } else {
+                $response->add($wizard->getViewResult());
+            }
+
+            return $this->getResponse()->setContent($response);
+        }
+
+        private function stepCollectionClosure() {
+            $stepCollectionClosure = function () {
+                $stepCollection = new StepCollection();
+                $stepCollection->add($this->stepOne());
+                $stepCollection->add($this->stepTwo());
+                $stepCollection->add($this->stepThree());
+
+                return $stepCollection;
+            };
+            return $stepCollectionClosure;
+        }
+
+        private function stepOne() {
+            $viewModel = new ViewModel();
+            $viewModel-&gtsetTemplate("wizard/wizard/stepone.phtml");
+            $stepOne = new \WasabiLib\Wizard\StepController("Name", "Name");
+            $stepOne-&gtsetFormAction("wizard");
+            $stepOne-&gtsetViewModelAndRequiredVariables($viewModel);
+
+            $stepOne->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                $this->form = new StepOneForm("stepOneForm", $closureArguments->getServiceLocator());
+            });
+            $stepOne->setProcessClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                $request = $closureArguments->getRequest();
+                $serviceLocator = $closureArguments->getServiceLocator();
+                if ($request->isPost()) {
+                    $formValidator = new StepOneFormValidator();
+                    $this->form->setInputFilter($formValidator->getInputFilter());
+                    $this->form->setData($request->getPost());
+                    if ($this->form->isValid()) {
+                        $this->setStorageValue($this->form->getData());
+                        return true;
+                    } else {
+                        $this->setStorageValue($this->form->getData());
+                        $response = new \WasabiLib\Ajax\Response();
+
+                        $info = new Info("alert_info_one", "WARNING", $messageString."");
+                        $modal = new WasabiModalView("#wasabi_modal",
+                                    $serviceLocator-&gtget("ViewRenderer"), $info);
+                        $responseConfigurator-&gtaddResponseType($modal);
+                        $response-&gtadd($modal);
+                        $this-&gtsetProcessErrorMessage($response-&gtasInjectedJS());
+                        return false;
+                    }
+                }
+                return false;
+            });
+
+            return $stepOne;
+        }
+
+        private function stepTwo() {
+            $viewModel = new ViewModel();
+            $viewModel-&gtsetTemplate("wizard/wizard/steptwo.phtml");
+            $stepTwo = new \WasabiLib\Wizard\StepController("Address", "Address");
+            $stepTwo-&gtsetFormAction("wizard");
+            $stepTwo-&gtsetViewModelAndRequiredVariables($viewModel);
+
+            $stepTwo-&gtsetInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                $serviceLocator = $closureArguments-&gtgetServiceLocator();
+                $this-&gtform = new StepTwoForm("stepTwoForm", $serviceLocator);
+            });
+            $stepTwo-&gtsetProcessClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                $request = $closureArguments-&gtgetRequest();
+                $serviceLocator = $closureArguments-&gtgetServiceLocator();
+                if ($request-&gtisPost()) {
+                    $formValidator = new StepTwoFormValidator();
+                    $this-&gtform-&gtsetInputFilter($formValidator-&gtgetInputFilter());
+                    $this-&gtform-&gtsetData($request-&gtgetPost());
+
+                    if ($this-&gtform-&gtisValid()) {
+                        return true;
+                    } else {
+                        $response = new \WasabiLib\Ajax\Response();
+
+                        $info = new Info("alert_info_one", "WARNING"
+                                    , "Please evaluate the required fields.");
+                        $modal = new WasabiModalView("#wasabi_modal",
+                                    $serviceLocator-&gtget("ViewRenderer"), $info);
+                        $response-&gtadd($modal);
+                        $this-&gtsetProcessErrorMessage($response-&gtasInjectedJS());
+
+                        return false;
+                    }
+                }
+
+            });
+
+            $stepTwo-&gtsetPostProcessClosure(
+                function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                    $this-&gtsetStorageValue($this-&gtform-&gtgetData());
+                    return true;
+            });
+            $stepTwo-&gtsetLeaveToAncestorClosure(
+                function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                    $request = $closureArguments-&gtgetRequest();
+                    $this-&gtsetStorageValue($request-&gtgetPost());
+
+                    return true;
+            });
+
+            return $stepTwo;
+        }
+
+        private function stepThree() {
+            $viewModel = new ViewModel();
+            $viewModel-&gtsetTemplate("wizard/wizard/stepthree.phtml");
+            $stepThree = new \WasabiLib\Wizard\StepController("Summary", "Summary");
+            $stepThree-&gtsetFormAction("wizard");
+            $stepThree-&gtsetViewModelAndRequiredVariables($viewModel);
+
+            $stepThree-&gtsetEnterClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
+                /* @var $storageContainer StorageContainer */
+                $storageContainer = $this-&gtgetStorageContainer();
+                $storageIterator = $storageContainer-&gtgetIterator();
+                $content = "&lttable  class='table  table-bordered table-hover table-striped'&gt";
+                foreach ($storageIterator as $arrayElement) {
+                    foreach ($arrayElement as $key =&gt $element) {
+                        $content .= "&lttr&gt&lttd&gt".$key."&lt/td&gt&lttd&gt".$element."&lt/td&gt";
+                    }
+                }
+                $content .= "&lt/table&gt";
+                $this-&gtaddViewModelVariablesAndContent("content", $content);
+
+            });
+
+            return $stepThree;
+        }
+            </code>
+        </pre>
+</div>
+
+<h1><?= $this->translate('Appendix') ?></h1>
+<span class="anchor" id="appendix"></span>
+<h3><?= $this->translate('Modal Windows Example CSS') ?></h3>
+<div class="highlight"><pre>
+<code class="language-css">
+.red-standard-modal .modal-header{
+    color: #fff;
+    background-color: #DB4A39;
+    margin: 4px -29px 16px -29px;
+    padding: 3px 10px 6px 12px;
+    font-size: 100%;
+    line-height: 1.2;
+    position: relative;
+    border-bottom: none;
+    box-shadow: 0 1px 2px #5e5e61;
+}
+
+.red-standard-modal .modal-header:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 0px;
+    top: 100%;
+    border-width: 3px 7px;
+    border-style: solid;
+    border-color: #d2322d transparent transparent #d2322d;
+}
+.red-standard-modal .modal-header:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    top: 100%;
+    border-width: 3px 7px;
+    border-style: solid;
+    border-color: #d2322d #d2322d transparent transparent;
+}
+
+.black-standard-modal .modal-header{
+    color: #fff;
+    background-color: #000000;
+    margin: 4px -29px 16px -29px;
+    padding: 3px 10px 6px 12px;
+    font-size: 100%;
+    line-height: 1.2;
+    position: relative;
+    border-bottom: none;
+    box-shadow: 0 1px 2px #5e5e61;
+}
+
+.black-standard-modal .modal-header:after {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 0px;
+    top: 100%;
+    border-width: 3px 7px;
+    border-style: solid;
+    border-color: #000000 transparent transparent #000000;
+}
+
+.black-standard-modal .modal-header:before {
+    content: ' ';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    top: 100%;
+    border-width: 3px 7px;
+    border-style: solid;
+    border-color: #000000 #000000 transparent transparent;
+}
+
+.modal.slow-fade .modal-dialog {
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    -webkit-transition: -webkit-transform 1.0s ease-out;
+    -moz-transition: -moz-transform 1.0s ease-out;
+    -o-transition: -o-transform 1.0s ease-out;
+    transition: transform 1.0s ease-out;
+}
+
+.modal.fast-fade .modal-dialog {
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    -webkit-transition: -webkit-transform 0.15s ease-out;
+    -moz-transition: -moz-transform 0.15s ease-out;
+    -o-transition: -o-transform 0.15s ease-out;
+    transition: transform 0.15s ease-out;
+}
+
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.modal-backdrop.fade {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.modal-backdrop.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+</code>
+<code class="language-html">
+
+&ltform id="&lt?=$this-&gtformName?&gt" class="form-horizontal" name="&lt?=$this-&gtformName?&gt" method="post"
+    action="&lt?=$this-&gtformAction?&gt"&gt
+    &ltfieldset&gt
+        firstStep
+        &lt?=$this-&gtwizardFormCurrentStep?&gt
+    &lt/fieldset&gt
+&lt/form&gt
+
+&ltform id="&lt?=$this-&gtformName?&gt" class="form-horizontal" name="&lt?=$this-&gtformName?&gt" method="post"
+    action="&lt?=$this-&gtformAction?&gt"&gt
+    &ltfieldset&gt
+    &lt!-- Form Name --&gt
+    &lt?=$this-&gtwizardFormCurrentStep?&gt
+    &lt!-- Text input--&gt
+    &ltdiv class="form-group"&gt
+        &ltlabel class="col-md-4 control-label" for="firstname"&gtFirst Name&lt/label&gt
+        &ltdiv class="col-md-4"&gt
+        &ltinput id="firstname" name="firstname" placeholder="First Name" class="form-control input-md"
+                type="text" value="&lt?=$this-&gtfirstname?&gt"&gt
+        &lt/div&gt
+    &lt/div&gt
+    &lt!-- Text input--&gt
+    &ltdiv class="form-group"&gt
+        &ltlabel class="col-md-4 control-label" for="lastname"&gtLast Name&lt/label&gt
+            &ltdiv class="col-md-4"&gt
+                &ltinput id="lastname" name="lastname" placeholder="Last Name"
+                    class="form-control input-md" type="text" value="&lt?=$this-&gtlastname?&gt"&gt
+            &lt/div&gt
+        &lt/div&gt
+    &lt/fieldset&gt
+&lt/form&gt
+
+&ltform id="&lt?=$this-&gtformName?&gt" class="form-horizontal" name="&lt?=$this-&gtformName?&gt" method="post"
+        action ="&lt?=$this-&gtformAction?&gt"&gt
+    &ltfieldset&gt
+        &lt?=$this-&gtwizardFormCurrentStep?&gt
+            &lt!-- Text input--&gt
+            &ltdiv class="form-group"&gt
+            &ltlabel class="col-md-4 control-label" for="Address"&gtAddress&lt/label&gt
+            &ltdiv class="col-md-4"&gt
+            &ltinput id="address" name="address" placeholder="Address" class="form-control input-md"
+                type="text"value="&lt?=$this-&gtaddress?&gt"&gt
+            &lt/div&gt
+        &lt/div&gt
+    &lt/fieldset&gt
+&lt/form&gt
+
+&ltform id="&lt?= $this-&gtformName ?&gt" class="form-horizontal" name="&lt?= $this-&gtformName ?&gt"
+        method="post" action="&lt?=$this-&gtformAction?&gt"&gt
+    &ltfieldset&gt
+        &lt?=$this-&gtcontent?&gt
+            &lt!-- Form Name --&gt
+            &ltlegend&gtThank you for the information&lt/legend&gt
+            &ltbutton id="finishButton" data-dismiss="modal"&gtGoodby&lt/button&gt
+        &ltbr&gt
+    &lt/fieldset&gt
+&lt/form&gt
+</code>
+    </pre></div>
+
+
+</div>
+<div class="col-md-3" role="complementary">
+    <nav class="wasabilib-sidebar hidden-print hidden-xs hidden-sm" data-spy="affix" data-offset-top="200">
+        <ul class="nav wasabilib-sidenav">
+            <li>
+                <a href="#examples">Examples</a>
+                <ul class="nav wasabilib-sidenav">
+                    <li><a href="#generic_message">Generic Message</a></li>
+                    <li><a href="#console_log">ConsoleLog</a></li>
+                    <li><a href="#inner_html">InnerHtml</a></li>
+                    <li><a href="#modal_info_window">Modal Info Window</a></li>
+                    <li><a href="#modal_dialog_window">Modal Dialog Window</a></li>
+                    <li><a href="#modal_standard_window">Modal Standard Window</a></li>
+                    <li><a href="#gritter_message">GritterMessage</a></li>
+                    <li><a href="#dom_manipulator">DomManipulator</a></li>
+                    <li><a href="#trigger_event_manager">TriggerEventManager</a></li>
+                    <li><a href="#redirect">Redirect</a></li>
+                    <li><a href="#alert">Alert</a></li>
+                    <li><a href="#wizard">Wizard</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#appendix">Appendix</a>
+            </li>
+        </ul>
+        <a class="back-to-top" href="#top">
+            Back to top
+        </a>
+
+    </nav>
+</div>
+
+</div>

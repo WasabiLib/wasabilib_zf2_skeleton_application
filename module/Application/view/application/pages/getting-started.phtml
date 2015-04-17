@@ -1,0 +1,53 @@
+<div class="wasabiLib-header">
+    <div class="container">
+        <h1>Getting Started</h1>
+        <p>Two easy ways to get the WasabiLib running.</p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-9" role="main">
+        <h2>Using the WasabiLib Skeleton</h2>
+        <p><?= sprintf($this->translate("To start a new WasabiLib based project is accomplished in two easy steps."))?></p>
+        <ol>
+            <li><?= sprintf($this->translate("Download the WasabiLib Skeleton Application from %sGitHub%s by clicking on the following link %sDownload%s or go to the start site and push the download button."), '<a href="http://www.github.com">', '</a>', '<a href="http://www.github.com/wasabi/download">', '</a>')?></p></li>
+            <li><?= sprintf($this->translate("Use a %scomposer%s capable program e.g. PhpStorm or console application and execute the composer install command and follow the installation instructions."), '<a href=https://getcomposer.org/>', '</a>')?></p></li>
+            <li><?= sprintf($this->translate("Create a new module e.g. with the ZFTool."), '<a href=https://getcomposer.org/>', '</a>')?></p></li>
+        </ol>
+        <h2> Using the Module</h2>
+        <ol>
+            <li><?= sprintf($this->translate("Download the WasabiLib module from %sGitHub%s by clicking on the following link %sDownload%s and put it in the modules folder in your ZF2 project."), '<a href="http://www.github.com">', '</a>', '<a href="http://www.github.com/wasabi/download">', '</a>')?></p></li>
+            <li><?= sprintf($this->translate("Go to the application.config.php file and add WasibiLib to the array of modules."), '<a href=https://getcomposer.org/>', '</a>')?></p></li>
+            <li><?= sprintf($this->translate("Copy the wasabilib_assets folder to the public folder."))?></p></li>
+            <li><?= sprintf($this->translate("Add all needed JavaScript and CSS files to the head of your used html template, e.g. layout.phtml. Following one can see all available files with a short description."))?></p></li>
+        </ol>
+        <h3>Files to include</h3>
+        <p><?= sprintf($this->translate("If the WasabiLib was installed manually one has to include several files to get the library work properly. The following two sections shows which files one can include. Note: To include the mentioned files one can use the method headLink(...) for the CSS and headScript(...) for the JavaScript files within a phtml template file."))?></p>
+        <h4>CSS files</h4>
+        <p><?= sprintf($this->translate("The WasabiLib uses seven different files to define the CSS for the different parts used within the library. The first four files in the following listing are created to define the default appearance of the different gritter notifications and the default modal windows shipped with the WasabiLib. The last three files define the look of the bootstrap components and the font awesome icons."))?></p>
+        <ul>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/wasabi.gritter.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/wasabi.modal.standard.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/wasabi.modal.dialog.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/wasabi.modal.info.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/bootstrap-theme.min.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/bootstrap.min.css"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/css/font-awesome.min.css"))?></p></li>
+        </ul>
+        <h4>JavaScript files</h4>
+        <p><?= sprintf($this->translate("The JavaScript files in the following listing define the behaviour of the components used within the WasabiLib. The first seven files has to be included to use the AJAX mechanism of the WasabiLib. The mechanism depends on %sjQuery%s Version 2.1, %sbootstrap%s in version 3.3.4 and %sGritter for jQuery%s in version 1.7.4 (but later version should work also properly). The last two files should be included if one wants html5 elements and media support for the ie8."), '<a href="http://getbootstrap.com/">', '</a>', '<a href="https://jquery.com/">', '</a>', '<a href="https://github.com/jboesch/Gritter">', '</a>')?></p>
+        <ul>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/WasabiLib/Communication.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/WasabiLib/Recipients/gritter.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/WasabiLib/Recipients/common.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/WasabiLib/Recipients/config.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/bootstrap.min.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/WasabiLib/wasabi.gritter.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/jquery.min.js"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9')"))?></p></li>
+            <li><?= sprintf($this->translate("'/wasabilib_assets/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9')"))?></p></li>
+        </ul>
+    </div>
+    </div>
+</div>
+

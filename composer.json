@@ -1,0 +1,51 @@
+{
+    "name": "wasabi/zf2-skeleton-application",
+    "description": "Skeleton Application for ZF2 customized by wasabi",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.phundament.com"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "wasabi/wasabilib",
+                "version": "0.0.2",
+                "minimum-stability": "dev",
+                "source": {
+                    "url": "https://github.com/WasabilibOrg/wasabilib.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*",
+        "zendframework/zend-form": "2.3.*",
+        "wasabi/wasabilib":">=0.0.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "ComposerScript\\Installer" : ""
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "ComposerScript\\Installer::postInstall"
+        ],
+        "post-update-cmd": [
+            "ComposerScript\\Installer::postUpdate"
+        ],
+        "post-create-project-cmd": [
+            "php -r \"echo 'post-create-project-cmd';\""
+        ]
+    }
+}

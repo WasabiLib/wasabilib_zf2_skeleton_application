@@ -1,0 +1,23 @@
+<form id="<?=$this->formName?>" class="form-horizontal" name="<?=$this->formName?>" method="post" action="<?=$this->formAction?>">
+    <fieldset>
+
+        <!-- Form Name -->
+        <?=$this->wizardFormCurrentStep?>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="firstname">First Name</label>
+            <div class="col-md-4">
+                <input id="firstname" name="firstname" placeholder="First Name" class="form-control input-md" type="text" value="<?=$this->firstname?>">
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="lastname">Last Name</label>
+            <div class="col-md-4">
+                <input id="lastname" name="lastname" placeholder="Last Name" class="form-control input-md" type="text" value="<?=$this->lastname?>">
+            </div>
+        </div>
+
+
+    </fieldset>
+</form>
