@@ -18,7 +18,6 @@ Get Composer
 To get composer please follow the instructions below.
 
     curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://github.com/WasabiLib/wasabilib_zf2_skeleton_application.git" master path/to/your/project
 
 ### Apache Setup
 
