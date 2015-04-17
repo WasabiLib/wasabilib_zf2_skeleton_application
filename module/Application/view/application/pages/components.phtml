@@ -621,7 +621,7 @@
         $viewModel = new ViewModel();
         $viewModel->setTemplate("route/to/stepone.phtml");
         $stepOne->setFormAction("route/to/formAction");
-        $stepOne->setViewModelAndRequiredVariables($viewModel);
+        $stepOne->setViewModel($viewModel);
 
         return $stepOne;
     }
