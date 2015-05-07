@@ -11,22 +11,16 @@ return array(
         'default' => array(
 
             array(
-                'label' => 'Getting-Started',
+                'label' => 'Home',
                 'route' => 'application/default',
-                'controller' => 'pages',
-                'action' => 'gettingStarted',
+                'controller' => 'Index',
+                'action' => 'index',
             ),
             array(
-                'label' => 'Examples',
+                'label' => 'ReadMe',
                 'route' => 'application/default',
-                'controller' => 'pages',
-                'action' => 'examples',
-            ),
-            array(
-                'label' => 'Components',
-                'route' => 'application/default',
-                'controller' => 'pages',
-                'action' => 'components',
+                'controller' => 'Index',
+                'action' => 'readme',
             ),
         ),
     )

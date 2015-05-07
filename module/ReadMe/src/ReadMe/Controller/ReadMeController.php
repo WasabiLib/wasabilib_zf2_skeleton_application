@@ -1,18 +1,17 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * Created by PhpStorm.
+ * User: norman.albusberger
+ * Date: 09.07.14
+ * Time: 10:12
  */
 
-namespace Application\Controller;
+namespace ReadMe\Controller;
 
-use Application\Form\StepOneForm;
-use Application\Form\StepOneFormValidator;
-use Application\Form\StepTwoForm;
-use Application\Form\StepTwoFormValidator;
+use ReadMe\Form\StepOneForm;
+use ReadMe\Form\StepOneFormValidator;
+use ReadMe\Form\StepTwoForm;
+use ReadMe\Form\StepTwoFormValidator;
 use WasabiLib\Ajax\GritterMessage;
 use WasabiLib\Ajax\InnerHtml;
 use WasabiLib\Ajax\Response;
@@ -35,42 +34,11 @@ use WasabiLib\Modal\Info;
 use WasabiLib\Mail;
 use Application\Examples\ExampleResponseConfigurator;
 
-class PagesController extends AbstractActionController
-{
-    public function indexAction()
-    {
+class ReadMeController extends AbstractActionController {
 
-        return new ViewModel();
-    }
-
-    public function startExampleAction(){
-        $innerHtml = new InnerHtml("#start_example_target_id","This comes right from the Server");
-        return $this->getResponse()->setContent(new Response($innerHtml));
-    }
-    public function examplesAction(){
-
-    }
-    public function componentsAction(){
-
-    }
-    public function gettingStartedAction(){
-
-    }
-
-    public function openModalAction(){
-        $modal = new WasabiModal("Ich bin ein Modal","Mein Modal Inhalt");
-        $modalView = new WasabiModalView("#modalplace",$this->getServiceLocator()->get('ViewRenderer'),$modal);
-        $message = new GritterMessage("Hallo","Was stimmt nicht mit Dir?");
-        $message->setType(GritterMessage::TYPE_SUCCESS);
-        $ajaxResponse = new Response();
-        $ajaxResponse->add($modalView);
-        $ajaxResponse->add($message);
-        return $this->getResponse()->setContent($ajaxResponse);
-    }
-
-    // ----------------------------- EXAMPLES SECTION ----------------------------//
+// ----------------------------- EXAMPLES SECTION ----------------------------//
     public function redirectAction() {
-        $redirect = new Redirect("/application/pages/gettingStarted");
+        $redirect = new Redirect("/");
 
         $response = new Response();
         $response->add($redirect);
@@ -185,7 +153,7 @@ class PagesController extends AbstractActionController
         $standard = new WasabiModal("Standard", "Standard Window");
 
         $button = new Button($this->getServiceLocator()->get('translator')->translate('More Info'));
-        $button->setAction("secondOfThree");
+        $button->setAction("/readme/secondOfThree");
 
         $standard->addButton($button);
 
@@ -205,7 +173,7 @@ class PagesController extends AbstractActionController
         $modalConf->setIcon("fa-question");
         $modalConf->getConfirmButton()->setButtonText($this->getServiceLocator()->get('translator')->translate("Abort"));
         $modalConf->getConfirmButton()->isNoDismissButton();
-        $modalConf->getConfirmButton()->setAction("thirdOfThree");
+        $modalConf->getConfirmButton()->setAction("/readme/thirdOfThree");
         $modalConf->getDismissButton()->setButtonText($this->getServiceLocator()->get('translator')->translate("decline"));
 
         $modalConf->addClass("wasabi");
@@ -637,7 +605,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/stepone.phtml");
         $stepOne = new \WasabiLib\Wizard\StepController("Name", "Name");
-        $stepOne->setFormAction("wizard");
+        $stepOne->setFormAction("/readme/wizard");
         $stepOne->setViewModel($viewModel);
 
         $stepOne->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
@@ -677,7 +645,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/steptwo.phtml");
         $stepTwo = new \WasabiLib\Wizard\StepController("Address", "Address");
-        $stepTwo->setFormAction("wizard");
+        $stepTwo->setFormAction("/readme/wizard");
         $stepTwo->setViewModel($viewModel);
 
         $stepTwo->setInitClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
@@ -725,7 +693,7 @@ class PagesController extends AbstractActionController
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/stepthree.phtml");
         $stepThree = new \WasabiLib\Wizard\StepController("Summary", "Summary");
-        $stepThree->setFormAction("wizard");
+        $stepThree->setFormAction("/readme/wizard");
         $stepThree->setViewModel($viewModel);
 
         $stepThree->setEnterClosure(function (\WasabiLib\Wizard\ClosureArguments $closureArguments) {
@@ -783,7 +751,7 @@ class PagesController extends AbstractActionController
         $stepOne = new \WasabiLib\Wizard\StepController("first step", "firstStep");
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/firstSimpleStep.phtml");
-        $stepOne->setFormAction("simpleWizard");
+        $stepOne->setFormAction("/readme/simpleWizard");
         $stepOne->setViewModel($viewModel);
 
         return $stepOne;
@@ -793,7 +761,7 @@ class PagesController extends AbstractActionController
         $stepTwo = new \WasabiLib\Wizard\StepController("second step", "secondStep");
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/secondSimpleStep.phtml");
-        $stepTwo->setFormAction("simpleWizard");
+        $stepTwo->setFormAction("/readme/simpleWizard");
         $stepTwo->setViewModel($viewModel);
 
         return $stepTwo;
@@ -804,7 +772,7 @@ class PagesController extends AbstractActionController
         $stepThree = new \WasabiLib\Wizard\StepController("finish", "finish");
         $viewModel = new ViewModel();
         $viewModel->setTemplate("wizard/wizard/thirdSimpleStep.phtml");
-        $stepThree->setFormAction("simpleWizard");
+        $stepThree->setFormAction("/readme/simpleWizard");
         $stepThree->setViewModel($viewModel);
 
         return $stepThree;

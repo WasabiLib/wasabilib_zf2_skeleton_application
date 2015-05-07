@@ -5,7 +5,7 @@
  * Date: 04.12.14
  * Time: 11:07
  */
-namespace Application\Form;
+namespace ReadMe\Form;
 
 use Zend\Captcha;
 use Zend\Form\Element;

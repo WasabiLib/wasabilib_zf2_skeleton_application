@@ -1,0 +1,64 @@
+<div class="jumbotron">
+    <h1><?php echo "Yeah...", '<span class="zf-green">', '</span>' ?></h1>
+    <p>
+        <?php echo sprintf($this->translate('Congratulations!
+    You have successfully installed the %sWasabiLib Skeleton Application%s powered by the Zend Framework 2.
+    You are currently running Zend Framework version %s.
+    This skeleton can serve as a simple starting point for you to begin building your application on %sWasabiLib%s and ZF2.'),
+            '<a href="https://github.com/wasabilib/skeleton" target="_blank">', '</a>',
+            \Zend\Version\Version::VERSION,
+            '<a href="http://www.wasabilib.org" target="_blank">', '</a>') ?>
+    </p>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    <?php echo sprintf($this->translate('WasabiLib for Zend Framework 2 is under active development.
+                If you are interested in following the development of WasabiLib,
+                there is a special portal on the official wasabi library
+                development website which provides links to the
+                WasabiLib Development %swiki%s, %sdev blog%s, %sissue tracker%s, and much more.
+                This is a great resource for staying up to date with the latest developments!')
+                        , '<a href="http://wasabilib.org/wiki">', '</a>',
+                        '<a href="http://wasabilib.org/blog">', '</a>',
+                        '<a href="https://github.com/wasabilib/zf2/issues">', '</a>') ?>
+                </p>
+                <p><a class="btn btn-success pull-right" href="http://devteam.wasabi.de/wasabilib"><?php echo $this->translate('WasabiLib Development Portal') ?> &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $this->translate('Discover WasabiLib') ?></h3>
+            </div>
+            <div class="panel-body">
+                <p><?php echo sprintf($this->translate('If you want to know how to use this library push the button below and discover the possibilities of WasabiLib.'), '<a href="http://www.wasabi.de" target="_blank">', '</a>') ?></p>
+                <p><a class="btn btn-success pull-right" href=/readme><?php echo $this->translate('Explore WasabiLib Module') ?> &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!--    <div class="col-md-4">-->
+<!--        <div class="panel panel-default">-->
+<!--            <div class="panel-heading">-->
+<!--                <h3 class="panel-title">--><?php //echo $this->translate('Help &amp; Support') ?><!--</h3>-->
+<!--            </div>-->
+<!--            <div class="panel-body">-->
+<!--                <p>--><?php //echo sprintf($this->translate('If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s.'), '<a href="irc://irc.freenode.net/zftalk">', '</a>', '<a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">', '</a>') ?><!--</p>-->
+<!--                <p><a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank">--><?php //echo $this->translate('Ping us on IRC') ?><!-- &raquo;</a></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>

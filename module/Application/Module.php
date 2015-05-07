@@ -9,9 +9,9 @@
 
 namespace Application;
 
-use WasabiLib\Wizard\StorageContainer;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use WasabiLib\Wizard\StorageContainer;
 
 class Module
 {
@@ -41,7 +41,6 @@ class Module
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                    "Application\Examples" => __DIR__ . '/src/' . "Examples",
                 ),
             ),
         );

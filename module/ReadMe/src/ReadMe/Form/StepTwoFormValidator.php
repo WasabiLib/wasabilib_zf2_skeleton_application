@@ -5,7 +5,7 @@
  * Date: 04.12.14
  * Time: 11:08
  */
-namespace Application\Form;
+namespace ReadMe\Form;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
