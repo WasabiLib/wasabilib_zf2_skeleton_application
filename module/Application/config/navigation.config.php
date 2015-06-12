@@ -16,12 +16,7 @@ return array(
                 'controller' => 'Index',
                 'action' => 'index',
             ),
-            array(
-                'label' => 'ReadMe',
-                'route' => 'application/default',
-                'controller' => 'Index',
-                'action' => 'readme',
-            ),
+
         ),
     )
 );

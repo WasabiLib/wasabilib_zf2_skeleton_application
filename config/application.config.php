@@ -5,7 +5,6 @@ return array(
         'Application',
         'WasabiLib',
         'WasabiMail',
-        'ReadMe',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
