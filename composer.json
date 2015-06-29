@@ -15,7 +15,7 @@
             "type": "package",
             "package": {
                 "name": "wasabi/wasabilib",
-                "version": "0.0.2",
+                "version": "0.0.5",
                 "minimum-stability": "dev",
                 "source": {
                     "url": "https://github.com/WasabiLib/wasabilib.git",

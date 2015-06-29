@@ -8,7 +8,7 @@ This is a starting point for using the WasabiLib within a Zendframework skeleton
 Installation
 ------------
     cd your/project/dir
-    git clone https://github.com/WasabilibOrg/wasabilib_zf2_skeleton_application.git
+    git clone https://github.com/WasabiLib/wasabilib_zf2_skeleton_application.git
     cd wasabilib_zf2_skeleton_application
     php composer.phar self-update
     php composer.phar install
