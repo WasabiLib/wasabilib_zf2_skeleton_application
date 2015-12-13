@@ -1,1 +1,0 @@
-Mails send by the local transport component will be put in here.
