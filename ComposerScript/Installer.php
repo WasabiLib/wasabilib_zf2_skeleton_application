@@ -51,10 +51,11 @@ class Installer
         if (is_dir('vendor/wasabi/wasabilib')) {
             self::rrmdir('vendor/WasabiLib');
             rename('vendor/wasabi/wasabilib', 'vendor/WasabiLib');
+            rename('vendor/wasabi/Mail', 'vendor/WasabiMail');
             rmdir('vendor/wasabi');
         }
 
-        self::rcopy("vendor/WasabiLib/wasabilib_assets", "public/wasabilib_assets");
+        self::rcopy("vendor/WasabiLib/wasabi", "public/vendor/wasabi");
     }
 
     // removes files and non-empty directories

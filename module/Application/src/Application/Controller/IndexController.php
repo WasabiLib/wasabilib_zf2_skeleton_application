@@ -10,8 +10,6 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use WasabiMail\Mail;
 
 class IndexController extends AbstractActionController
 {
@@ -19,7 +17,4 @@ class IndexController extends AbstractActionController
 
     }
 
-    public function readmeAction(){
-
-    }
 }

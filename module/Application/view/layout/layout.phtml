@@ -1,38 +1,35 @@
-<?php echo $this->doctype(); ?>
+<?= $this->doctype(); ?>
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?= $this->headTitle('Wasabi '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php echo $this->headMeta()
+        <?= $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
         ?>
-
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
-//            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/dropzone.basic.css') //dropzone
+        <!-- CSS -->
+        <?= $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.png'))
             ->prependStylesheet($this->basePath() . '/css/style.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/wasabi.gritter.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/wasabi.modal.standard.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/wasabi.modal.dialog.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/wasabi.modal.info.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/bootstrap-theme.min.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/bootstrap.min.css')
-            ->prependStylesheet($this->basePath() . '/wasabilib_assets/css/font-awesome.min.css')
-            ->prependStylesheet($this->basePath() . '/css/docs.min.css')
+            ->prependStylesheet($this->basePath() . '/vendor/wasabi/css/wasabi.gritter.css')
+            ->prependStylesheet($this->basePath() . '/vendor/wasabi/css/wasabi.modal.css')
+            ->prependStylesheet($this->basePath() . '/vendor/wasabi/css/wasabi.suggest.css')
+            ->prependStylesheet($this->basePath() . '/vendor/wasabi/css/wasabi.wizard.css')
+            ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap-theme.min.css')
+            ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css')
+            ->prependStylesheet($this->basePath() . '/vendor/fontAwesome/css/font-awesome.min.css')
             ; ?>
 
-        <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/WasabiLib/wasabilib.min.js')
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/WasabiLib/ext_lib/bootstrap.min.js')
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/WasabiLib/ext_lib/wasabi.gritter.js')
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/WasabiLib/ext_lib/wasabi.suggest.js')
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/WasabiLib/ext_lib/jquery-min.js')
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath() . '/wasabilib_assets/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        <!-- JAVASCRIPT's -->
+        <?= $this->headScript()
+            ->prependFile($this->basePath() . '/vendor/wasabi/js/wasabilib.min.js')
+            ->prependFile($this->basePath() . '/vendor/bootstrap/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/vendor/wasabi/js/wasabi.gritter.js')
+            ->prependFile($this->basePath() . '/vendor/wasabi/js/wasabi.suggest.js')
+            ->prependFile($this->basePath() . '/vendor/jquery/js/jquery-2.1.4.min.js')
+            ->prependFile($this->basePath() . '/vendor/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/vendor/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
         ; ?>
 
     </head>
@@ -42,27 +39,23 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/skeletonLogo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Wasabi Skeleton Application') ?></a>
+                    <a class="navbar-brand" href="<?= $this->url('home') ?>"><img class="pull-left" src="<?= $this->basePath('img/skeletonLogo.png') ?>" alt="WasabiLib.org">&nbsp;<?= $this->translate('Wasabi Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <?php // <-- Add this !!
-                    echo $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav');
-
-                    ?>
+                    <?= $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav') ?>
 
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
-            <?php echo $this->content; ?>
+            <?= $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; <?php echo date('Y') ?> WasabiLib.org <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; <?= date('Y') ?> WasabiLib.org <?= $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
+        <?= $this->inlineScript() ?>
     </body>
 </html>

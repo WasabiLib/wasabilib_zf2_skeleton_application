@@ -70,6 +70,10 @@ body {
 
 .navbar-brand {
     padding: 10px 20px;
+    margin-left: 0px;
+    line-height: 30px;
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5);font-weight:lighter;color:#000000;
+
 }
 
 .affix {
@@ -93,7 +97,7 @@ footer{
     color: rgba(149, 150, 150, 0.90);
 }
 #wasabilib.navbar .navbar-brand {
-    color: rgba(16, 127, 201, 1);
+    color: rgb(9, 52, 12);
 
 }
 #wasabilib.navbar {
