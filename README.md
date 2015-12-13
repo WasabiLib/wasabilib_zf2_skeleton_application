@@ -31,6 +31,10 @@ project and you should be ready to go! It should look something like below:
         <Directory /path/to/your/project/public>
            DirectoryIndex index.php
            AllowOverride All
-           Require all granted
+           Order allow,deny
+           Allow from all
+            <IfModule mod_authz_core.c>
+                Require all granted
+            </IfModule>
         </Directory>
     </VirtualHost>
