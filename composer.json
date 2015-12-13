@@ -28,9 +28,9 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*",
-        "zendframework/zend-form": "2.3.*",
-        "wasabi/wasabilib":">=0.0.1"
+        "zendframework/zendframework": "2.5.*",
+        "zendframework/zend-form": "2.5.*",
+        "wasabi/wasabilib":">=0.0.5"
     },
     "autoload": {
         "psr-0": {

@@ -21,14 +21,14 @@ class Installer
     {
         self::preInstall();
 
-        $answer = self::getUserInput("Wollen sie ein eigenes git Repository fuer das Projekt verwenden? (Ja/Nein): ");
-        if($answer && $answer === "Ja") {
+        $answer = self::getUserInput("Would you like to create your own repository for your new project? (y/n): ");
+        if($answer && $answer === "y") {
             self::rrmdir('.git');
             $output = `git init`;
             $output = `git add -A`;
             $output = `git commit -m"Initialer Commit"`;
 
-            $gitOrigin = self::getUserInput("Bitte geben Sie den Pfad zum Remote-Repository ein (oder druecken Sie die Enter-Taste):");
+            $gitOrigin = self::getUserInput("Please enter the path to the remote repository (or press enter):");
             if($gitOrigin) {
                 $output = `git remote add origin $gitOrigin`;
             }

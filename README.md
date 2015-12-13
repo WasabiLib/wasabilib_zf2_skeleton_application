@@ -1,4 +1,4 @@
-ZF2 Skeleton with integrated WasabiLib (Test)
+ZF2 Skeleton with integrated WasabiLib
 =======================
 ##Please Visit http://www.wasabilib.org for detailed information.
 Introduction
@@ -28,9 +28,8 @@ project and you should be ready to go! It should look something like below:
         ServerName yourproject.localhost
         DocumentRoot /path/to/your/project/public
         <Directory /path/to/your/project/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
+           DirectoryIndex index.php
+           AllowOverride All
+           Require all granted
         </Directory>
     </VirtualHost>

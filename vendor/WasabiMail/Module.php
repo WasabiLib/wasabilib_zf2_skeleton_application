@@ -61,7 +61,7 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
 
                     $transporter->setOptions($options);
                 }
-                //Local with wamp - write to disk
+                //Local development mode - write to disk
                 elseif($env=="local") {
                     $fileConfig = $transporterConfig["local"];
                     $options = new \Zend\Mail\Transport\FileOptions();
