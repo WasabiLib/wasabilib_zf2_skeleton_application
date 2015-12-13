@@ -11,7 +11,7 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use wasabiMail\Mail;
+use WasabiMail\Mail;
 
 class IndexController extends AbstractActionController
 {
