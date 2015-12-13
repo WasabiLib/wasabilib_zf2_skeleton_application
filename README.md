@@ -34,4 +34,3 @@ project and you should be ready to go! It should look something like below:
            Require all granted
         </Directory>
     </VirtualHost>
-Test
