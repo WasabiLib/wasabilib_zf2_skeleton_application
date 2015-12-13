@@ -1,26 +1,36 @@
-ZF2 Skeleton with integrated [WasabiLib](http://www.wasabilib.org)
+[WasabiLib](http://www.wasabilib.org) Skeleton Application
 =======================
 ##Please Visit http://www.wasabilib.org for detailed information.
 
 Introduction
 ------------
-This is a starting point for using the WasabiLib within a Zendframework skeleton application.
+This is a starting point for using the WasabiLib Modules and ZF2.
 
-Installation
-------------
-    cd your/project/dir
-    git clone https://github.com/WasabiLib/wasabilib_zf2_skeleton_application.git
-    cd wasabilib_zf2_skeleton_application
-    php composer.phar self-update
-    php composer.phar install
+#Following Modules are bundled
+1. Zend Framework 2.5*
+2. [WasabiLib](https://github.com/WasabiLib/wasabilib) (Basic ajax components, Server-side modals, Gritter messages, Suggest, Wizard) 
+3. [WasabiMail](https://github.com/WasabiLib/Mail) (improved ZF2 based Email Module)
+4. [Bootstrap](http://getbootstrap.com/)
+5. [FontAwesome](https://fortawesome.github.io/Font-Awesome/) 
+6. [JQuery 2.1.4](https://jquery.com/)
 
-Get Composer
-----------------------------
+
+
+#Installation
+
+##Get Composer
+
 To get composer please follow the instructions below.
 
     curl -s https://getcomposer.org/installer | php --
+    cd your/project/dir
+    
+##Clone Repository    
+    git clone https://github.com/WasabiLib/wasabilib_zf2_skeleton_application.git
+    cd wasabilib_zf2_skeleton_application
+    composer install
 
-### Apache Setup
+##Setup Apache Virtual Host
 
 To setup apache, setup a virtual host to point to the public/ directory of the
 project and you should be ready to go! It should look something like below:
@@ -38,3 +48,5 @@ project and you should be ready to go! It should look something like below:
             </IfModule>
         </Directory>
     </VirtualHost>
+
+Make sure mod_rewrite is active
