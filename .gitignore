@@ -9,6 +9,6 @@ nbproject
 composer.lock
 vendor/bin
 WasabiLib
-vendor/WasabiMail
+WasabiMail
 
 

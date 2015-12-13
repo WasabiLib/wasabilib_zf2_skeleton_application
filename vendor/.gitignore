@@ -2,5 +2,4 @@
 .composer
 composer
 zendframework
-WasabiMail
 autoload.php
