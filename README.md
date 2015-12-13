@@ -1,4 +1,4 @@
-ZF2 Skeleton with integrated WasabiLib
+ZF2 Skeleton with integrated [WasabiLib](http://www.wasabilib.org)
 =======================
 ##Please Visit http://www.wasabilib.org for detailed information.
 
