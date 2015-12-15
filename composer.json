@@ -1,7 +1,7 @@
 {
     "name": "wasabi/zf2-skeleton-application",
     "description": "Skeleton Application for ZF2 customized by wasabilib.org",
-    "license": "BSD-3-Clause",
+    "license": "MIT License",
     "keywords": [
         "framework",
         "zf2"
