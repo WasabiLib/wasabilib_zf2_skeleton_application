@@ -44,7 +44,7 @@
                     <a class="navbar-brand" href="<?= $this->url('home') ?>"><img class="pull-left" src="<?= $this->basePath('img/skeletonLogo.png') ?>" alt="WasabiLib.org">&nbsp;<?= $this->translate('Wasabi Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <?= $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav') ?>
+                    <?= $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav')->setPartial('layout/navigation.phtml'); ?>
 
                 </div><!--/.nav-collapse -->
             </div>

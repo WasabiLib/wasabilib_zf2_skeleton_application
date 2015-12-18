@@ -16,6 +16,31 @@ return array(
                 'controller' => 'Index',
                 'action' => 'index',
             ),
+            array(
+                'label' => 'Submenu Expamle',
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => 'First  Menu Item',
+                        'route' => 'application/default',
+                        'controller' => 'Index'
+                        
+                    ),
+                    array(
+                        'label' => 'Second Menu Item',
+                        'route' => 'application/default',
+                        'controller' => 'Index'
+                        
+                    ),
+                    array(
+                        'label' => 'Thrid Menu Item',
+                        'route' => 'application/default',
+                        'controller' => 'Index'
+                        
+                    ),
+                )
+                
+            ),
 
         ),
     )
