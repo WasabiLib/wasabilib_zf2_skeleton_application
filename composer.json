@@ -1,42 +1,11 @@
 {
     "name": "wasabi/zf2-skeleton-application",
-    "description": "Skeleton Application for ZF2 customized by wasabilib.org",
+    "description": " ZF2 Skeleton Application - customized by wasabilib.org",
     "license": "MIT License",
     "keywords": [
         "framework",
-        "zf2"
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packages.phundament.com"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "wasabi/wasabilib",
-                "version": "0.0.5",
-                "minimum-stability": "dev",
-                "source": {
-                    "url": "https://github.com/WasabiLib/wasabilib.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        },
-      {
-          "type": "package",
-          "package": {
-              "name": "wasabi/Mail",
-              "version": "1.0",
-              "minimum-stability": "dev",
-              "source": {
-                  "url": "https://github.com/WasabiLib/Mail.git",
-                  "type": "git",
-                  "reference": "master"
-          }
-        }
-      }
+        "zf2",
+        "wasabilib"
     ],
     "homepage": "http://framework.zend.com/",
     "require": {
@@ -44,7 +13,7 @@
         "zendframework/zendframework": "2.5.*",
         "zendframework/zend-form": "2.5.*",
         "wasabi/wasabilib":">=0.0.5",
-        "wasabi/mail":">=1.0"
+        "wasabi/wasabimail":">=1.0"
     },
     "autoload": {
         "psr-0": {
