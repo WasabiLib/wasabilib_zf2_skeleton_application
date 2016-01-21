@@ -9,7 +9,7 @@ This is a starting point for using the WasabiLib Modules and ZF2.
 #Following Modules are bundled
 1. Zend Framework 2.5*
 2. [WasabiLib](https://github.com/WasabiLib/wasabilib) (Basic ajax components, Server-side modals, Gritter messages, Suggest, Wizard) 
-3. [WasabiMail](https://github.com/WasabiLib/Mail) (improved ZF2 based Email Module)
+3. [WasabiMail](https://github.com/WasabiLib/Mail) (enhanced ZF2 based Email Module with a responsive template and file attachment support)
 4. [Bootstrap](http://getbootstrap.com/)
 5. [FontAwesome](https://fortawesome.github.io/Font-Awesome/) 
 6. [JQuery 2.1.4](https://jquery.com/)
