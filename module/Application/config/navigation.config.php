@@ -33,7 +33,7 @@ return array(
                         
                     ),
                     array(
-                        'label' => 'Thrid Menu Item',
+                        'label' => 'Third Menu Item',
                         'route' => 'application/default',
                         'controller' => 'Index'
                         

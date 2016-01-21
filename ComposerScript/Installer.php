@@ -48,30 +48,12 @@ class Installer
     }
 
     private static function preInstall() {
-        if (is_dir('vendor/wasabi/wasabilib')) {
-            self::rrmdir('vendor/WasabiLib');
             rename('vendor/wasabi/wasabilib', 'vendor/WasabiLib');
-            rename('vendor/wasabi/Mail', 'vendor/WasabiMail');
+            rename('vendor/wasabi/wasabimail', 'vendor/WasabiMail');
             rmdir('vendor/wasabi');
-        }
 
-        self::rcopy("vendor/WasabiLib/wasabi", "public/vendor/wasabi");
-    }
 
-    // removes files and non-empty directories
-    private static function rrmdir($dir) {
-        if (is_dir($dir)) {
-            $files = scandir($dir);
-            foreach ($files as $file) {
-                if ($file != "." && $file != "..") {
-                    chmod("$dir/$file", 0777);
-                    self::rrmdir("$dir/$file");
-                }
-            }
-
-            rmdir($dir);
-        }
-        else if (file_exists($dir)) unlink($dir);
+            self::rcopy("vendor/WasabiLib/wasabi", "public/vendor/wasabi");
     }
 
     // copies files and non-empty directories
