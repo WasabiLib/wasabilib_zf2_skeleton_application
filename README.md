@@ -1,5 +1,7 @@
 [WasabiLib](http://www.wasabilib.org) Skeleton Application
 =======================
+[![Latest Stable Version](https://poser.pugx.org/wasabi/zf2-skeleton-application/v/stable)](https://packagist.org/packages/wasabi/zf2-skeleton-application) [![Total Downloads](https://poser.pugx.org/wasabi/zf2-skeleton-application/downloads)](https://packagist.org/packages/wasabi/zf2-skeleton-application) [![Latest Unstable Version](https://poser.pugx.org/wasabi/zf2-skeleton-application/v/unstable)](https://packagist.org/packages/wasabi/zf2-skeleton-application) [![License](https://poser.pugx.org/wasabi/zf2-skeleton-application/license)](https://packagist.org/packages/wasabi/zf2-skeleton-application)
+
 ##Please Visit http://www.wasabilib.org for detailed information.
 
 Introduction
